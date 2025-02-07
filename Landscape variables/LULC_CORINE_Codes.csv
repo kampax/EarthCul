@@ -1,0 +1,45 @@
+Original code;Colour;Original Class;Modified Code;Modified class;New colour;;unique;code;Uso
+111;#e6004d;Artificial surfaces > Urban fabric > Continuous urban fabric;100;Artificial surfaces ;#e6004d;;#e6004d;100;Artificial surfaces 
+112;#ff0000;Artificial surfaces > Urban fabric > Discontinuous urban fabric;100;Artificial surfaces ;#e6004d;;#ffa6ff;141;Green urban areas
+121;#cc4df2;Artificial surfaces > Industrial, commercial, and transport units > Industrial or commercial units;100;Artificial surfaces ;#e6004d;;#ffffa8;211; Non-irrigated arable land
+122;#cc0000;Artificial surfaces > Industrial, commercial, and transport units > Road and rail networks and associated land;100;Artificial surfaces ;#e6004d;;#ffff00;212; Permanently irrigated land
+123;#e6cccc;Artificial surfaces > Industrial, commercial, and transport units > Port areas;100;Artificial surfaces ;#e6004d;;#e6e600;213; Rice fields
+124;#e6cce6;Artificial surfaces > Industrial, commercial, and transport units > Airports;100;Artificial surfaces ;#e6004d;;#e68000;221; Vineyards
+131;#a600cc;Artificial surfaces > Mine, dump, and construction sites > Mineral extraction sites;100;Artificial surfaces ;#e6004d;;#f2a64d;222; Fruit trees and berry plantations
+132;#a64dcc;Artificial surfaces > Mine, dump, and construction sites > Dump sites;100;Artificial surfaces ;#e6004d;;#e6a600;223; Olive groves
+133;#ff4dff;Artificial surfaces > Mine, dump, and construction sites > Construction sites;100;Artificial surfaces ;#e6004d;;#e6e64d;231; Pastures
+141;#ffa6ff;Artificial surfaces > Artificial, non-agricultural vegetated areas > Green urban areas;141;Green urban areas;#ffa6ff;;#ffe6a6;241; Annual crops associated with permanent crops
+142;#ffe6ff;Artificial surfaces > Artificial, non-agricultural vegetated areas > Sport and leisure facilities;100;Artificial surfaces ;#e6004d;;#ffe64d;242; Complex cultivation patterns
+211;#ffffa8;Agricultural areas > Arable land > Non-irrigated arable land;211; Non-irrigated arable land;#ffffa8;;#e6cc4d;243; Land principally occupied by agriculture, with significant areas of natural vegetation
+212;#ffff00;Agricultural areas > Arable land > Permanently irrigated land;212; Permanently irrigated land;#ffff00;;#f2cca6;244; Agro-forestry areas
+213;#e6e600;Agricultural areas > Arable land > Rice fields;213; Rice fields;#e6e600;;#80ff00;311; Broad-leaved forest
+221;#e68000;Agricultural areas > Permanent crops > Vineyards;221; Vineyards;#e68000;;#00a600;312; Coniferous forest
+222;#f2a64d;Agricultural areas > Permanent crops > Fruit trees and berry plantations;222; Fruit trees and berry plantations;#f2a64d;;#4dff00;313; Mixed forest
+223;#e6a600;Agricultural areas > Permanent crops > Olive groves;223; Olive groves;#e6a600;;#ccf24d;321; Natural grasslands
+231;#e6e64d;Agricultural areas > Pastures > Pastures;231; Pastures;#e6e64d;;#a6ff80;322; Moors and heathland
+241;#ffe6a6;Agricultural areas > Heterogeneous agricultural areas > Annual crops associated with permanent crops;241; Annual crops associated with permanent crops;#ffe6a6;;#a6e64d;323; Sclerophyllous vegetation
+242;#ffe64d;Agricultural areas > Heterogeneous agricultural areas > Complex cultivation patterns;242; Complex cultivation patterns;#ffe64d;;#a6f200;324; Transitional woodland-shrub
+243;#e6cc4d;Agricultural areas > Heterogeneous agricultural areas > Land principally occupied by agriculture, with significant areas of natural vegetation;243; Land principally occupied by agriculture, with significant areas of natural vegetation;#e6cc4d;;#e6e6e6;331; Beaches, dunes, sands
+244;#f2cca6;Agricultural areas > Heterogeneous agricultural areas > Agro-forestry areas;244; Agro-forestry areas;#f2cca6;;#cccccc;332; Bare rocks
+311;#80ff00;Forest and semi natural areas > Forests > Broad-leaved forest;311; Broad-leaved forest;#80ff00;;#ccffcc;333; Sparsely vegetated areas
+312;#00a600;Forest and semi natural areas > Forests > Coniferous forest;312; Coniferous forest;#00a600;;#000000;334; Burnt areas
+313;#4dff00;Forest and semi natural areas > Forests > Mixed forest;313; Mixed forest;#4dff00;;#a6e6cc;335; Glaciers and perpetual snow
+321;#ccf24d;Forest and semi natural areas > Scrub and/or herbaceous vegetation associations > Natural grasslands;321; Natural grasslands;#ccf24d;;#a6a6ff;411; Inland marshes
+322;#a6ff80;Forest and semi natural areas > Scrub and/or herbaceous vegetation associations > Moors and heathland;322; Moors and heathland;#a6ff80;;#4d4dff;412; Peat bogs
+323;#a6e64d;Forest and semi natural areas > Scrub and/or herbaceous vegetation associations > Sclerophyllous vegetation;323; Sclerophyllous vegetation;#a6e64d;;#ccccff;421; Salt marshes
+324;#a6f200;Forest and semi natural areas > Scrub and/or herbaceous vegetation associations > Transitional woodland-shrub;324; Transitional woodland-shrub;#a6f200;;#e6e6ff;422; Salines
+331;#e6e6e6;Forest and semi natural areas > Open spaces with little or no vegetation > Beaches, dunes, sands;331; Beaches, dunes, sands;#e6e6e6;;#a6a6e6;423; Intertidal flats
+332;#cccccc;Forest and semi natural areas > Open spaces with little or no vegetation > Bare rocks;332; Bare rocks;#cccccc;;#00ccf2;511; Water courses
+333;#ccffcc;Forest and semi natural areas > Open spaces with little or no vegetation > Sparsely vegetated areas;333; Sparsely vegetated areas;#ccffcc;;#80f2e6;512; Water bodies
+334;#000000;Forest and semi natural areas > Open spaces with little or no vegetation > Burnt areas;334; Burnt areas;#000000;;#00ffa6;521; Coastal lagoons
+335;#a6e6cc;Forest and semi natural areas > Open spaces with little or no vegetation > Glaciers and perpetual snow;335; Glaciers and perpetual snow;#a6e6cc;;#a6ffe6;522; Estuaries
+411;#a6a6ff;Wetlands > Inland wetlands > Inland marshes;411; Inland marshes;#a6a6ff;;#e6f2ff;523; Sea and ocean
+412;#4d4dff;Wetlands > Inland wetlands > Peat bogs;412; Peat bogs;#4d4dff;;;;
+421;#ccccff;Wetlands > Maritime wetlands > Salt marshes;421; Salt marshes;#ccccff;;;;
+422;#e6e6ff;Wetlands > Maritime wetlands > Salines;422; Salines;#e6e6ff;;;;
+423;#a6a6e6;Wetlands > Maritime wetlands > Intertidal flats;423; Intertidal flats;#a6a6e6;;;;
+511;#00ccf2;Water bodies > Inland waters > Water courses;511; Water courses;#00ccf2;;;;
+512;#80f2e6;Water bodies > Inland waters > Water bodies;512; Water bodies;#80f2e6;;;;
+521;#00ffa6;Water bodies > Marine waters > Coastal lagoons;521; Coastal lagoons;#00ffa6;;;;
+522;#a6ffe6;Water bodies > Marine waters > Estuaries;522; Estuaries;#a6ffe6;;;;
+523;#e6f2ff;Water bodies > Marine waters > Sea and ocean;523; Sea and ocean;#e6f2ff;;;;

@@ -1,0 +1,1 @@
+This folder contains the scripts that were used for the downloads and preprocessing of the images that were used in the project.
