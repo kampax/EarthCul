@@ -171,10 +171,6 @@ Each folder contains specific scripts and documentation for different data proce
 3. Run scripts in logical sequence (download → process → integrate)
 4. Follow individual folder README files for detailed instructions
 
-## Citation
-
-If you use this code or data in your research, please cite the EarthCul project appropriately.
-
 
 ## Contact
 
