@@ -1,5 +1,19 @@
-//Code to download maps of soil hydrological groups from Soil Grids with pixel resolution of 250 meters
-//Source: https://gee-community-catalog.org/projects/hihydro_soil/
+/***************************************************************************************
+ * Project: EarthCul
+ * Author: Carlos Javier Navarro
+ * Email: carlosnavarro@ugr.es
+ * Description: Code to download global soil hydrologic group maps from Soil Grids at
+ *              250-meter resolution. The data are clipped to selected national park AOIs
+ *              from the "BBs_EarthCul" feature collection. Dual soil class groups are
+ *              remapped for visualization.
+ * Data source:
+ * - HiHydroSoil v2.0 Hydrologic Soil Group 250m
+ *   https://gee-community-catalog.org/projects/hihydro_soil/
+ * 
+ * Notes:
+ * - Uses colorbrewer YlGnBu palette for visualization.
+ * - Exports GeoTIFF images to Google Drive organized by park-specific folders.
+ ***************************************************************************************/
 
 /////////////////////////
 // Select the park

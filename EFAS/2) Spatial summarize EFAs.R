@@ -1,3 +1,36 @@
+################################################################################
+# Project: EFAs (Ecological Functional Attributes)
+# Author: Carlos Javier Navarro
+# Email: carlosnavarro@ugr.es
+# Description: This script processes multi-temporal Sentinel-2 mosaics to extract
+#              zonal statistics (median and standard deviation) for Red, Green, and
+#              Blue bands over predefined spatial units (grid cells) of a selected
+#              protected area. The output includes per-segment metrics exported as
+#              raster layers, enabling functional diversity and heterogeneity analyses.
+#
+# Functionality:
+# - Loads Sentinel-2 seasonal mosaics (preprocessed and reprojected).
+# - Resamples the grid to match Sentinel-2 resolution and extent.
+# - Computes per-segment statistics across all mosaics.
+# - Renames and exports resulting segment metrics as individual GeoTIFF layers.
+# - Optionally renames bands in the original mosaics for clarity.
+#
+# Input:
+# - Reprojected Sentinel-2 mosaics (*.tif)
+# - Grid raster (integer values used as segment IDs)
+#
+# Output:
+# - One raster layer per statistic per band and season in results/<park_name>/
+#
+# Notes:
+# - High RAM usage (~8.5 GB) expected during segment statistic calculations.
+# - Grid values (SID) must match segment identifiers; ensure validity.
+# - Based on methodology from Vaz et al., using a 1 km² grid to capture spatial patterns.
+################################################################################
+
+
+
+
 library(raster)
 library(terra)
 library(dplyr)
@@ -114,11 +147,11 @@ length(unique(rstMosaicStats$SID))
 
 # rstMosaicStats <- rstMosaicStats %>% filter(!is.na(SID))
 
-# ## Excluir NA despues de aplicarle el view identifico la columna 
+# Exclude NA after applying the view identified the column
 # rstMosaicStats = rstMosaicStats[1:166477, ]
 
 #######################
-####Export like Tiff###
+####Export as Tiff###
 #######################
 
 library(terra)
@@ -127,30 +160,30 @@ base <- rast(rstGridFilePath)
 
 raster_base <- base
 
-# # Asumiendo que 'z' es tu raster base y 'rstClustStats.DivInd' es tu dataframe
-# # Asegúrate de que 'z' tiene valores únicos que corresponden a los IDs en 'rstClustStats.DivInd'
-# 
-# # Primero, crea un raster para cada columna de interés en rstClustStats.DivInd
+# # Assuming 'z' is your base raster and 'rstClustStats.DivInd' is your dataframe
+# # Make sure 'z' has unique values that correspond to the IDs in 'rstClustStats.DivInd'
+#
+# # First, create a raster for each column of interest in rstClustStats.DivInd
 # columnas <- names(rstMosaicStats)[2:25] # Ajusta el índice según tus columnas de interés
 # columnas <- names(rstMosaicStats)[2:ncol(rstMosaicStats)] # Ajusta el índice según tus columnas de interés
 
 test<-basename(mosaicFiles)
 
-# Crear las combinaciones y unirlas en una sola cadena
+# Create combinations and join them into a single string
 
 result <- sub("_2018.*", "", test)
 
-# Paso 2: Agregar _median y _sd a cada nombre modificado
+# Step 2: Add _median and _sd to each modified name
 result <- paste0(rep(result, each = 2), c("_median", "_sd"))
 
 result <- sub("SR_SENTINEL_", "", result)
 
-# Reemplazar doble guión bajo con un solo guión bajo
+# Replace double underscores with a single underscore
 result <- gsub("__", "_", result)
 new_colnames <- c("SID", result)
 
 
-# Asignar los nuevos nombres a las columnas del data frame
+# Assign the new names to the columns of the data frame
 colnames(rstMosaicStats) <- new_colnames
 
 columnas <- names(rstMosaicStats)[2:113]
@@ -158,50 +191,50 @@ columnas <- names(rstMosaicStats)[2:113]
 rstMosaicStats <- rstMosaicStats %>% filter(!is.na(SID))
 
 for(col in columnas){
-  # Crea un raster vacío con la misma extensión y resolución que 'z'
+  # Create an empty raster with the same extent and resolution as 'z'
   rast_temp <- rast(raster_base)
 
-  # Usa los valores de SID como índices para asignar los valores de la columna actual al raster
+  # Use the SID values as indices to assign the values of the current column to the raster
   vals <- rstMosaicStats[[col]]
   ids <- match(rstMosaicStats$SID, values(raster_base))
   rast_temp[ids] <- vals
 
-  # Guarda el raster resultante
+  # Save the resulting raster
   writeRaster(rast_temp, paste0("C:/Users/carlo/Desktop/EFAs/results/",parque,"/", col, "_raster.tif"), overwrite=TRUE)
 }
 
 
-#### Si quiero renombrar las bandas con el nombre de la capa 
+#### If I want to rename the bands with the layer name
 library(terra)
 library(fs)
 
-# Establecer el directorio de trabajo a la carpeta donde están los archivos .tif
+# Set the working directory to the folder where the .tif files are located
 
 
-# Obtener la lista de todos los archivos .tif en la carpeta
+# Get the list of all .tif files in the folder
 tif_files <- mosaicFiles
   # dir_ls(glob = "*.tif")
 
 for (tif_file in tif_files) {
-  # Cargar la imagen como un objeto raster
+  # Load the image as a raster object
   raster_obj <- rast(tif_file)
-  
-  # Obtener el nombre base del archivo (sin extensión)
+
+  # Get the base name of the file (without extension)
   base_name <- path_ext_remove(path_file(tif_file))
-  
-  # Renombrar las bandas utilizando el nombre del archivo
+
+  # Rename the bands using the file name
   names(raster_obj) <- paste0(base_name, seq_along(names(raster_obj)))
-  
-  # Crear un nombre temporal para el archivo
+
+  # Create a temporary name for the file
   temp_file <- tempfile(fileext = ".tif")
-  
-  # Guardar el archivo temporalmente con las bandas renombradas
+
+  # Save the temporary file with the renamed bands
   writeRaster(raster_obj, temp_file, overwrite = TRUE)
-  
-  # Reemplazar el archivo original con el archivo temporal
+
+  # Replace the original file with the temporary file
   file_copy(temp_file, tif_file, overwrite = TRUE)
-  
-  # Eliminar el archivo temporal
+
+  # Delete the temporary file
   file_delete(temp_file)
 }
 

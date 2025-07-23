@@ -1,15 +1,36 @@
+/********************************************************************************
+* Script Title: Seasonal Unsupervised Clustering of Sentinel-2 Imagery
+* Author: Carlos Javier Navarro (carlosnavarro@go.ugr.es)
+* Date: 10/11/2024
+* Adapted from: João Gonçalves (Porto, March 2018)
+*
+* Description:
+* This script performs unsupervised classification (k-means clustering) of
+* Sentinel-2 imagery mosaics for each meteorological season (Winter, Spring,
+* Summer, Autumn) over a selected National Park in Spain or Portugal.
+*
+* Functionality:
+* - Loads Sentinel-2 SR-Harmonized image collections (2017–2022) by season
+* - Filters images by date, cloud coverage, and AOI
+* - Computes seasonal median mosaics using RGB bands (B2, B3, B4)
+* - Samples pixels and trains a k-means clustering model (k = 20)
+* - Applies clustering to generate seasonal classification maps
+* - Exports both cluster maps and RGB mosaics to Google Drive
+*
+* Input:
+* - COPERNICUS/S2_SR_HARMONIZED imagery
+* - AOI defined by a selected park name in BBs_EarthCul FeatureCollection
+*
+* Output:
+* - 4 seasonal cluster maps (1 per season)
+* - 4 RGB mosaics (1 per season)
+*
+*
+* Notes:
+* - Clustering is unsupervised and results vary by season and AOI
+* - Designed for use in ecological diversity and landscape heterogeneity studies
+********************************************************************************/
 
- /* -----------------------------------------------------------------------------
-   Creates a unsupervised clustering map for each Sentinel-2 mosaic by 
-   meteorological season
-   
-   Author: Carlos Javier Navarro carlosnavarro@go.ugr.es
-   Date: 10/11/2024
-   
-   adapted from:
-   João Gonçalves
-   Porto, March 2018
- ------------------------------------------------------------------------------ */
 
 /////////////////////////
 // Select the park

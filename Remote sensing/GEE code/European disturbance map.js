@@ -1,9 +1,24 @@
+/***************************************************************************************
+ * Project: EarthCul
+ * Author: Carlos Javier Navarro
+ * Email: carlosnavarro@ugr.es
+ * Description: Code to download disturbance (riot) maps prepared at the European level
+ *              from LandTrend with a 30-meter pixel resolution. The disturbance data 
+ *              are clipped to national park AOIs and filtered to include only events 
+ *              occurring after 2005.
+ * Data source:
+ * - European Environment Agency (EEA) Biogeographical regions in Europe
+ *   https://www.eea.europa.eu/data-and-maps/figures/biogeographical-regions-in-europe-2
+ * 
+ * Visualization:
+ * - https://corneliussenf.users.earthengine.app/view/european-disturbance-map
+ * 
+ * Notes:
+ * - The script allows selecting a national park AOI from the "BBs_EarthCul" collection.
+ * - Outputs are exported to Google Drive in park-specific folders using EPSG:3035 CRS.
+ ***************************************************************************************/
 
-//Code to download the riot maps prepared at the European level from LandTrend with a pixel resolution of 30m
-//Article 
-//https://www.eea.europa.eu/data-and-maps/figures/biogeographical-regions-in-europe-2
-//Visor 
-//https://corneliussenf.users.earthengine.app/view/european-disturbance-map
+
 var BBs = ee.FeatureCollection("users/cnav/EarthCul/BBs_EarthCul");
 
 /////////////////////////

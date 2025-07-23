@@ -1,14 +1,25 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
 var radiation = ee.Image("projects/ee-elaurenyoung/assets/GHI");
-/***** End of imports. If edited, may not auto-convert in the playground. *****/
-//Code to download solar radiation maps obtained from the Global Solar Atlas project
-//https://gee-community-catalog.org/projects/gsa/
-// Information: https://globalsolaratlas.info/support/faq
-// GLOBAL SOLAR ATLAS 
-//-- GHI, Global Horizontal Irradiation
-//--DNI, Direct Normal Irradiation
-//--DIF, Diffuse Horizontal Irradiation
-//GHI and DIF are referred to a surface horizontal to the ground, while DNI is referred to a surface perpendicular to the Sun. Higher values of DIF/GHI ratio represent a higher occurrence of clouds, higher atmospheric pollution or higher water vapor content.
+/***************************************************************************************
+ * Project: EarthCul
+ * Author: Carlos Javier Navarro
+ * Email: carlosnavarro@ugr.es
+ * Description: Code to download solar radiation maps (Global Horizontal Irradiation - GHI
+ *              and Direct Normal Irradiation - DNI) from the Global Solar Atlas project.
+ *              Data are clipped to selected national park AOIs from the "BBs_EarthCul" 
+ *              feature collection.
+ * Data source:
+ * - Global Solar Atlas (GSA)
+ *   https://gee-community-catalog.org/projects/gsa/
+ *   https://globalsolaratlas.info/support/faq
+ * 
+ * Notes:
+ * - GHI and DNI refer to irradiance on horizontal and sun-facing surfaces respectively.
+ * - Higher DIF/GHI ratio indicates more cloud cover or atmospheric moisture.
+ * - Uses matplotlib plasma palette for visualization.
+ * - Exports GeoTIFF images to Google Drive organized by park-specific folders.
+ ***************************************************************************************/
+
 /////////////////////////
 // Select the park
 /////////////////////////

@@ -1,10 +1,26 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
 var dataset = ee.Image("CIESIN/GPWv411/GPW_Population_Density/gpw_v4_population_density_rev11_2020_30_sec");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
-// This code allows the download of population density and population count maps from the Gridded Population of World Version 4 (GPWv4) with a pixel resolution of 927.67 meters
-// Source: https://developers.google.com/earth-engine/datasets/catalog/CIESIN_GPWv411_GPW_Population_Density#bands
-// National data to compare
-//https://atlasau.mitma.gob.es/#bbox=-635499,4592142,449419,218360&c=indicator&i=pobevo.densidad&s=2022&selcodgeo=18134&view=map4
+
+/***************************************************************************************
+ * Project: EarthCul
+ * Author: Carlos Javier Navarro
+ * Email: carlosnavarro@ugr.es
+ * Description: Code to download population density and population count maps from the
+ *              Gridded Population of the World Version 4 (GPWv4) dataset, with a pixel
+ *              resolution of approximately 927.67 meters. The data are clipped to the
+ *              selected national park AOI from the "BBs_EarthCul" feature collection.
+ * Data source:
+ * - CIESIN GPWv411 Population Density and Count
+ *   https://developers.google.com/earth-engine/datasets/catalog/CIESIN_GPWv411_GPW_Population_Density
+ * 
+ * Notes:
+ * - Includes visualization palettes for density and count layers.
+ * - Exports GeoTIFF images to Google Drive organized by park-specific folders.
+ ***************************************************************************************/
+
+
+
 /////////////////////////
 // Select the park
 ///////////////////////// 

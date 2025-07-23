@@ -1,17 +1,26 @@
-// Code for calculate the index of Ecosystem Services provision (ESPI)
+/***************************************************************************************
+ * Project: EarthCul
+ * Author: Carlos Javier Navarro
+ * Email: carlosnavarro@ugr.es
+ * Description: Code to calculate the Ecosystem Services Provision Index (ESPI) using
+ *              remotely sensed data from Sentinel-2. The script computes various indices
+ *              (NDVI, LSWI, EVI, NDWI, NDSI, NBR) for a selected national park AOI,
+ *              applies cloud and shadow masking, and generates annual ESPI maps
+ *              based on the mean and coefficient of variation of the selected index.
+ * Data sources:
+ * - Sentinel-2 Surface Reflectance Harmonized (COPERNICUS/S2_SR_HARMONIZED)
+ * - Sentinel-2 Cloud Probability (COPERNICUS/S2_CLOUD_PROBABILITY)
+ * 
+ * References:
+ * - https://www.researchgate.net/publication/305650523_An_integrative_index_of_Ecosystem_Services_provision_based_on_remotely_sensed_data
+ * - https://www.sciencedirect.com/science/article/pii/S1470160X21005203
+ * - https://www.futurewater.nl/wp-content/uploads/2021/01/20210919_InleLake_ES_final_report_v2.pdf
+ * 
+ * Notes:
+ * - The script allows selection of the index and national park for analysis.
+ * - Outputs are exported to Google Drive organized by park name.
+ ***************************************************************************************/
 
-// Article
-//https://www.researchgate.net/publication/305650523_An_integrative_index_of_Ecosystem_Services_provision_based_on_remotely_sensed_data
-
-// Related
-//https://www.sciencedirect.com/science/article/pii/S1470160X21005203
-//https://www.futurewater.nl/wp-content/uploads/2021/01/20210919_InleLake_ES_final_report_v2.pdf
-
-
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-
-// Variable to select the index
 var indice = 'NDVI'; // 'NDVI','LSWI', 'EVI', 'NDWI', 'NDSI',
 
 /////////////////////////

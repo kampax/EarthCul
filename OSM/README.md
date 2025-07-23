@@ -1,43 +1,114 @@
-This folder shows the scripts that were used to download the different Open Street Map variables, and their subsequent categorization.
+# OpenStreetMap (OSM) Variables
 
-The list of the varibles that werw obtained: 
-*Table 1*
+This module extracts and processes OpenStreetMap data to quantify to generate spatial layers that will be used in the spatial modeling of ecosystem services from social media data across 8 Spanishn and Portuguese National Parks for the EarthCul project's Cultural Ecosystem Services analysis.
 
-| Fuente          | Archivo                                      |
-| --------------- | -------------------------------------------- |
-| OSM             | accommodation_SierraNieves.geojson           |
-| OSM             | amenity_bicycle_rental_SierraNieves.geojson  |
-| OSM             | amenity_community_centre_SierraNieves.geojson|
-| OSM             | amenity_drinking_water_SierraNieves.geojson  |
-| OSM             | amenity_fountain_SierraNieves.geojson        |
-| OSM             | amenity_social_facility_SierraNieves.geojson |
-| OSM             | barAndRestaurant_SierraNieves.geojson        |
-| OSM             | beaches_SierraNieves.geojson                 |
-| OSM             | bikeRoutes_SierraNieves.geojson              |
-| OSM             | campsite_SierraNieves.geojson                |
-| OSM             | geological                                   |
-| OSM             | glacier_SierraNieves.geojson                 |
-| OSM             | greenSpaces_SierraNieves.geojson             |
-| OSM             | highway_bus_stop_SierraNieves.geojson        |
-| OSM             | historic_SierraNieves.geojson                |
-| OSM             | lakes_SierraNieves.geojson                   |
-| OSM             | leisure_court_SierraNieves.geojson           |
-| OSM             | parking_SierraNieves.geojson                 |
-| OSM             | place_square_SierraNieves.geojson            |
-| OSM             | railway_rail_SierraNieves.geojson            |
-| OSM             | recreational_SierraNieves.geojson            |
-| OSM             | refuges_SierraNieves.geojson                 |
-| OSM             | religious_place_SierraNieves.geojson        |
-| OSM             | rivers_SierraNieves.geojson                  |
-| OSM             | roads_SierraNieves.geojson                   |
-| OSM             | route_hiking_SierraNieves.geojson           |
-| OSM             | sighting_points_SierraNieves.geojson         |
-| OSM             | ski_facilities_SierraNieves.geojson          |
-| OSM             | small_town_SierraNieves.geojson              |
-| OSM             | sport_climbing_SierraNieves.geojson          |
-| OSM             | streets_SierraNieves.geojson                 |
-| OSM             | tourismAttraction_SierraNieves.geojson      |
-| OSM             | volcanic_SierraNieves.geojson                |
-| OSM             | waterBodies_SierraNieves.geojson             |
-| OSM             | wifi_SierraNieves.geojson                    |
-| Remote sensing  | Population density                          |
+## Overview
+
+OpenStreetMap provides crowdsourced geospatial data on infrastructure, amenities, and cultural features that are essential for understanding human activities and cultural ecosystem services in protected areas. This module implements a comprehensive workflow from data download to derived metrics calculation.
+
+## Data Source
+
+- **Platform**: [OpenStreetMap](https://www.openstreetmap.org/)
+- **API**: Overpass API for programmatic data access
+- **Coverage**: Global, community-maintained geospatial database
+- **Licensing**: Open Database License (ODbL)
+
+## Methodology
+
+### 1. Data Download (`1_Variable download/`)
+
+**Script**: `1_Download layers.ipynb`
+- **Purpose**: Download OSM features using Overpass API queries
+- **Method**: Bounding box queries for each national park
+- **Output**: Individual GeoJSON files per feature type and park
+
+**Script**: `2_Join layers.ipynb`
+- **Purpose**: Consolidate related OSM features into thematic categories
+- **Method**: Merge semantically similar features (e.g., roads, accommodation types)
+- **Output**: Consolidated GeoJSON files by theme
+
+### 2. Derived Metrics (`2_Derived metrics/`)
+
+**Count Metrics** (`count/`):
+- **Script**: `3_Count point.ipynb`
+- **Purpose**: Calculate feature density within grid cells
+- **Method**: Spatial intersection with regular grid
+- **Output**: Raster layers with feature counts per cell
+
+**Presence/Absence** (`presence/`):
+- **Script**: `4_Presence and absence.ipynb`
+- **Purpose**: Binary presence indicators for each feature type
+- **Method**: Convert count data to binary (0/1) values
+- **Output**: Raster layers with presence/absence data
+
+**Distance Metrics** (`distance/`):
+- **Purpose**: Calculate proximity to infrastructure features
+- **Method**: Travel distance using whitetoolbox libraries in python
+- **Output**: Distance raster layers
+
+
+## Feature Categories
+
+### Infrastructure and Transportation
+- **Roads**: Motorways, highways, primary/secondary roads, tracks
+- **Streets**: Residential, service, living streets
+- **Railway**: Rail infrastructure
+- **Parking**: Vehicle, bicycle, motorcycle parking facilities
+- **Public Transport**: Bus stops, transportation hubs
+
+### Tourism and Recreation
+- **Accommodation**: Hotels, hostels, camping sites, mountain huts
+- **Restaurants and Bars**: Dining establishments, cafes
+- **Tourism Attractions**: Museums, viewpoints, cultural sites
+- **Recreational Areas**: Parks, playgrounds, sports facilities
+- **Routes**: Hiking trails, cycling routes, ski facilities
+
+### Natural Features
+- **Water Bodies**: Lakes, rivers, reservoirs, streams
+- **Beaches**: Coastal and lakshore areas
+- **Geological Features**: Peaks, cliffs, glaciers, volcanic features
+- **Green Spaces**: Parks, gardens, picnic areas
+
+### Cultural and Historic Sites
+- **Historic**: Monuments, memorials, monasteries
+- **Religious Places**: Churches, temples, places of worship
+- **Archaeological**: Paleontological sites, cultural heritage
+
+### Services and Amenities
+- **Utilities**: Drinking water, fountains, WiFi access
+- **Community**: Community centres, social facilities
+- **Emergency**: Refuges, shelters, safety facilities
+- **Sports**: Climbing areas, courts, recreational facilities
+
+## Processing Workflow
+
+### Phase 1: Data Acquisition
+1. **Download Individual Features**: Query Overpass API for specific OSM tags
+2. **Bounding Box Definition**: Use park boundaries to limit search area
+3. **Feature Extraction**: Save individual feature types as GeoJSON files
+
+### Phase 2: Data Consolidation  
+1. **Thematic Grouping**: Merge related features (e.g., all road types)
+2. **Geometry Standardization**: Convert points/lines to polygons for consistent analysis
+3. **Duplicate Removal**: Eliminate overlapping geometries from layer merging
+
+### Phase 3: Spatial Analysis
+1. **Grid-based Counting**: Calculate feature density within regular grid cells
+2. **Presence Mapping**: Generate binary presence/absence indicators
+3. **Distance Calculation**: Compute proximity to key infrastructure
+4. **Rasterization**: Convert vector results to raster format for integration
+
+
+
+## References
+
+- [OpenStreetMap](https://www.openstreetmap.org/): Community-driven mapping platform
+- [Overpass API](https://overpass-api.de/): OSM data query interface
+- [OSM Wiki](https://wiki.openstreetmap.org/): Feature tagging documentation
+
+## Contact
+
+For questions about OSM data processing or methodology:
+- **Author**: Carlos Javier Navarro
+- **Email**: carlosnavarro@ugr.es
+- **Project**: EarthCul - Cultural Ecosystem Services Analysis

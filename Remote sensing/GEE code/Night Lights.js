@@ -1,7 +1,19 @@
-//This code allows the download of night light maps with a resolution of 463.83 meters.
-// Source:
-//https://developers.google.com/earth-engine/datasets/catalog/NOAA_VIIRS_DNB_ANNUAL_V22
-
+/***************************************************************************************
+ * Project: EarthCul
+ * Author: Carlos Javier Navarro
+ * Email: carlosnavarro@ugr.es
+ * Description: Code to download nighttime lights maps with approximately 463.83 meter
+ *              resolution from the NOAA VIIRS DNB Annual V22 dataset. The data are clipped
+ *              to the selected national park AOI from the "BBs_EarthCul" feature collection,
+ *              and median values are computed over the period 2015-2022.
+ * Data source:
+ * - NOAA VIIRS Day/Night Band Annual Composite (V22)
+ *   https://developers.google.com/earth-engine/datasets/catalog/NOAA_VIIRS_DNB_ANNUAL_V22
+ * 
+ * Notes:
+ * - Outputs are exported to Google Drive organized by park name.
+ * - Uses EPSG:3035 projection.
+ ***************************************************************************************/
 
 /////////////////////////
 // Select the park

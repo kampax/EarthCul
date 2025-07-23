@@ -4,10 +4,25 @@ var canopy_vis = {"min":0,"max":50,"palette":["#010005","#150b37","#3b0964","#61
     canopy_height = ee.Image("users/nlang/ETH_GlobalCanopyHeight_2020_10m_v1"),
     standard_deviation = ee.Image("users/nlang/ETH_GlobalCanopyHeightSD_2020_10m_v1");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
-//This code allows the download of the canopy height with a resolution of 10 meters
-//Article: 
-//Lang, Nico, Walter Jetz, Konrad Schindler, and Jan Dirk Wegner. "A high-resolution canopy height model of the Earth." arXiv preprint arXiv:2204.08322 (2022).
-//https://gee-community-catalog.org/projects/canopy/
+
+/***************************************************************************************
+ * Project: EarthCul
+ * Author: Carlos Javier Navarro
+ * Email: carlosnavarro@ugr.es
+ * Description: Code to download canopy height layers and their associated standard deviation
+ *              at 10-meter resolution. The layers are extracted for Areas of Interest (AOIs)
+ *              corresponding to national parks defined in the "BBs_EarthCul" feature collection.
+ * Data source: Lang et al. 2022 - "A high-resolution canopy height model of the Earth"
+ *              arXiv:2204.08322
+ * Data URL: https://gee-community-catalog.org/projects/canopy/
+ * 
+ * Notes:
+ * - The code allows selecting the park of interest to clip the images.
+ * - Images are exported to Google Drive in park-specific folders.
+ ***************************************************************************************/
+
+
+
 var BBs = ee.FeatureCollection("users/cnav/EarthCul/BBs_EarthCul");
 /////////////////////////
 // Select the park

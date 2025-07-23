@@ -1,3 +1,41 @@
+################################################################################
+# Script Title: Spectral and Clustering Diversity Calculation from Sentinel-2
+# Adapted from: João Gonçalves (Porto, March 2018)
+# Author: Carlos Javier Navarro (carlosnavarro@go.ugr.es)
+# Date: 2024-11-15
+#
+# Description:
+# This R script processes Sentinel-2 seasonal mosaics and associated unsupervised
+# clustering maps to compute spectral and categorical diversity indicators across
+# a spatial grid (e.g., 1 km² cells). It calculates both:
+#   - Spectral statistics (mean, SD) for RGB bands by season
+#   - Categorical diversity indices based on seasonal k-means clusters
+#
+# Functionality:
+# - Loads multi-seasonal Sentinel-2 mosaics and clustering maps
+# - Resamples grid raster to match mosaics
+# - Computes zonal statistics per grid cell:
+#     * Spectral mean and standard deviation (RGB)
+#     * Cluster richness, Shannon diversity, Simpson, and inverse Simpson indices
+# - Outputs results both as CSV and as raster layers
+#
+# Input:
+# - Sentinel-2 mosaics (RGB), named *_mosaic.tif
+# - K-means clustering maps, named *_clust-1.tif
+# - Grid raster defining analysis units
+#
+# Output:
+# - CSV table of zonal statistics
+# - Raster maps for each spectral and diversity indicator
+#
+# Notes:
+# - Ensure memory availability: ~8.5 GB RAM needed
+# - Grid raster must contain unique integer IDs (SID)
+# - Designed for ecological diversity analysis in protected areas
+################################################################################
+
+
+
 library(raster)
 library(terra)
 library(dplyr)
@@ -90,7 +128,7 @@ length(unique(rstMosaicStats$SID))
 
 
 #######################
-####Export like Tiff###
+####Export as Tiff###
 #######################
 
 library(terra)
@@ -104,7 +142,7 @@ raster_base <- base
 #
 
 
-# Crear un vector con los nuevos nombres de las columnas
+# Create a raster for each column of interest in rstMosaicStats
 new_colnames <- c("SID","B4_autumn_mean", "B3_autumn_mean", "B2_autumn_mean",
                   "B4_autumn_sd", "B3_autumn_sd", "B2_autumn_sd",
                   "B4_spring_mean", "B3_spring_mean", "B2_spring_mean",
@@ -114,7 +152,7 @@ new_colnames <- c("SID","B4_autumn_mean", "B3_autumn_mean", "B2_autumn_mean",
                   "B4_winter_mean", "B3_winter_mean", "B2_winter_mean",
                   "B4_winter_sd", "B3_winter_sd", "B2_winter_sd")
 
-# Asignar los nuevos nombres a las columnas del data frame
+# Assign the new names to the columns of the data frame
 colnames(rstMosaicStats) <- new_colnames
 
 columnas <- names(rstMosaicStats)[2:25]
@@ -122,15 +160,15 @@ columnas <- names(rstMosaicStats)[2:25]
 rstMosaicStats <- rstMosaicStats %>% filter(!is.na(SID))
 
 for(col in columnas){
-  # Crea un raster vacío con la misma extensión y resolución que 'z'
+  # Create an empty raster with the same extent and resolution as 'z'
   rast_temp <- rast(raster_base)
 
-  # Usa los valores de SID como índices para asignar los valores de la columna actual al raster
+  # Use the SID values as indices to assign the values of the current column to the raster
   vals <- rstMosaicStats[[col]]
   ids <- match(rstMosaicStats$SID, values(raster_base))
   rast_temp[ids] <- vals
 
-  # Guarda el raster resultante
+  # Save the resulting raster
   writeRaster(rast_temp, paste0("C:/Users/carlo/Desktop/Diversity2/results/",parque,"/", col, "_raster.tif"), overwrite=TRUE)
 }
 
@@ -171,7 +209,7 @@ length(unique(rstClustStats.DivInd$SID))
 
 
 ################################
-### Rasterizar columnas ########
+### Rasterize Columns ##########
 ################################
 
 library(terra)
@@ -180,22 +218,22 @@ base <- rast(rstGridFilePath)
 
 raster_base <- base
 
-# Asumiendo que 'z' es tu raster base y 'rstClustStats.DivInd' es tu dataframe
-# Asegúrate de que 'z' tiene valores únicos que corresponden a los IDs en 'rstClustStats.DivInd'
+# Assuming 'z' is your base raster and 'rstClustStats.DivInd' is your dataframe
+# Ensure that 'z' has unique values that correspond to the IDs in 'rstClustStats.DivInd'
 
-# Primero, crea un raster para cada columna de interés en rstClustStats.DivInd
-columnas <- names(rstClustStats.DivInd)[2:ncol(rstClustStats.DivInd)] # Ajusta el índice según tus columnas de interés
+# First, create a raster for each column of interest in rstClustStats.DivInd
+columnas <- names(rstClustStats.DivInd)[2:ncol(rstClustStats.DivInd)] # Adjust the index according to your columns of interest
 
 for(col in columnas){
-  # Crea un raster vacío con la misma extensión y resolución que 'z'
+  # Create an empty raster with the same extent and resolution as 'z'
   rast_temp <- rast(raster_base)
 
-  # Usa los valores de SID como índices para asignar los valores de la columna actual al raster
+  # Use the SID values as indices to assign the values of the current column to the raster
   vals <- rstClustStats.DivInd[[col]]
   ids <- match(rstClustStats.DivInd$SID, values(raster_base))
   rast_temp[ids] <- vals
 
-  # Guarda el raster resultante
-  writeRaster(rast_temp, paste0("C:/Users/carlo/Desktop/Diversity2/results/",parque,"/", col, "_raster.tif"), overwrite=TRUE)
+  # Save the resulting raster
+  writeRaster(rast_temp, paste0("C:/Users/carlo/Desktop/Diversity2/results/",park,"/", col, "_raster.tif"), overwrite=TRUE)
 }
 
