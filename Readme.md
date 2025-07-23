@@ -16,7 +16,7 @@ The EarthCul project aims to model and understand Cultural Ecosystem Services by
 - **Sierra Nevada** (SierraNevada)
 - **Teide** (Teide)
 
-![Studyarea](ANEXOS/Figure%20EarthCul_Gray_Regiones.jpg)
+![Studyarea](Figures/Figure%20EarthCul_Gray_Regiones.jpg)
 **Figure 1**. European biogeographical regions and location of the eight mountain National Parks across the Iberian Peninsula and the Canary Islands. The National Parks included are: (1) Aigüestortes i Estany de Sant Maurici, (2) Ordesa y Monte Perdido, (3) Picos de Europa, (4) Peneda-Gerês, (5) Sierra de Guadarrama, (6) Sierra de las Nieves, (7) Sierra Nevada, and (8) Teide
 
 
