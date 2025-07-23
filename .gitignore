@@ -1,7 +1,6 @@
 Post processing/results/
 Remote sensing/results/
 EFAS/BaseLayers/
-Topographic variables/
 RGB diversity/results/
 OSM/Variable download/Earth OSM/
 Landscape variables/results/
@@ -10,7 +9,6 @@ Landscape variables/Fragstats Moving Window Size/
 .pandoc/
 ANEXOS/
 Climate variables/
-Photo downloads/
 
 
 
